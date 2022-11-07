@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { AppConfig } from './configs/configs.constants';
+import { AppConfig, databaseConfig } from './configs/configs.constants';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
@@ -24,6 +24,9 @@ async function bootstrap() {
       whitelist: true,
     }), //{ forbidNonWhitelisted: true, whitelist: true }
   );
+
+  console.log(databaseConfig);
+  
 
   await app.listen(AppConfig.port || process.env.PORT);
 }

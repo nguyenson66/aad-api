@@ -9,21 +9,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Create env
-      #   run: |
-      #     cat << EOF > .env
-      #     PORT=${{ secrets.PORT }}
-      #     DB_TYPE=${{ secrets.PODB_TYPERT }}
-      #     DB_HOST=${{ secrets.DB_HOST }}
-      #     DB_PORT=${{ secrets.DB_PORT }}
-      #     DB_USERNAME=${{ secrets.DB_USERNAME }}
-      #     DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-      #     DB_DATABASE=${{ secrets.DB_DATABASE }}
-      #     JWT_ACCESS_TOKEN_SECRET=${{ secrets.JWT_ACCESS_TOKEN_SECRET }}
-      #     JWT_ACCESS_TOKEN_EXPIRES_IN=${{ secrets.JWT_ACCESS_TOKEN_EXPIRES_IN }}
-      #     JWT_REFRESH_TOKEN_SECRET=${{ secrets.JWT_REFRESH_TOKEN_SECRET }}
-      #     JWT_REFRESH_TOKEN_EXPIRES_IN=${{ secrets.JWT_REFRESH_TOKEN_EXPIRES_IN }}
-      #     EOF
+      - name: Create env
+        run: |
+          cat << EOF > .env
+          PORT=${{ secrets.PORT }}
+          DB_TYPE=${{ secrets.PODB_TYPERT }}
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=${{ secrets.DB_PORT }}
+          DB_USERNAME=${{ secrets.DB_USERNAME }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_DATABASE=${{ secrets.DB_DATABASE }}
+          JWT_ACCESS_TOKEN_SECRET=${{ secrets.JWT_ACCESS_TOKEN_SECRET }}
+          JWT_ACCESS_TOKEN_EXPIRES_IN=${{ secrets.JWT_ACCESS_TOKEN_EXPIRES_IN }}
+          JWT_REFRESH_TOKEN_SECRET=${{ secrets.JWT_REFRESH_TOKEN_SECRET }}
+          JWT_REFRESH_TOKEN_EXPIRES_IN=${{ secrets.JWT_REFRESH_TOKEN_EXPIRES_IN }}
+          EOF
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:

@@ -9,7 +9,7 @@ import {
   IsEmail,
   Matches,
 } from 'class-validator';
-import { EGender } from 'src/common/constants/common.constants';
+import { EGender } from '../../../common/constants/common.constants';
 
 export class CreateUsersDto {
   @ApiProperty()

@@ -7,14 +7,24 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SharedModule } from './common/shared/shared.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { BookModule } from './modules/book/book.module';
+import { CategoryModule } from './modules/category/category.module';
+import { PublisherModule } from './modules/publisher/publisher.module';
+import { AuthorModule } from './modules/author/author.module';
+import { ImagesModule } from './modules/images/images.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     ScheduleModule.forRoot(),
-    UsersModule,
     AuthModule,
+    UsersModule,
     SharedModule,
+    BookModule,
+    CategoryModule,
+    PublisherModule,
+    AuthorModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

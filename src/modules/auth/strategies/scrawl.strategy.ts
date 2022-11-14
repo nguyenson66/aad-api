@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import Strategy from 'passport-headerapikey';
 import * as bcrypt from 'bcrypt';
-import { scrawlConfig } from 'src/configs/configs.constants';
+import { scrawlConfig } from '../../../configs/configs.constants';
 
 @Injectable()
 export class HeaderApiKeyStrategy extends PassportStrategy(

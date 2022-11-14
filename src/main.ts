@@ -22,11 +22,10 @@ async function bootstrap() {
       transform: true,
       forbidNonWhitelisted: true,
       whitelist: true,
-    }), //{ forbidNonWhitelisted: true, whitelist: true }
+    }),
   );
 
-  console.log(databaseConfig);
-  
+  // console.log(databaseConfig);
 
   await app.listen(AppConfig.port || process.env.PORT);
 }

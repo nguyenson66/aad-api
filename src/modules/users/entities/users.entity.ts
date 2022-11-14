@@ -1,4 +1,4 @@
-import { EGender, EStatus } from 'src/common/constants/common.constants';
+import { EGender, EStatus } from '../../../common/constants/common.constants';
 import {
   Entity,
   Column,

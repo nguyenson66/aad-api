@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ETypeToken } from 'src/common/constants/common.constants';
-import { jwtConfig } from 'src/configs/configs.constants';
+import { ETypeToken } from '../../common/constants/common.constants';
+import { jwtConfig } from '../../configs/configs.constants';
 import { IUsers } from '../users/interface/users.interface';
 import { UsersService } from '../users/users.service';
 import { IJwtAccessToken, IJwtRefreshToken } from './interface/jwt.interface';

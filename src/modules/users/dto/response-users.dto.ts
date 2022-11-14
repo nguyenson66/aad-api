@@ -7,7 +7,7 @@ import {
   IsEnum,
   IsDateString,
 } from 'class-validator';
-import { EGender, EStatus } from 'src/common/constants/common.constants';
+import { EGender, EStatus } from '../../../common/constants/common.constants';
 import { IUsers } from '../interface/users.interface';
 
 export class ResponseUsersDto implements IUsers {

@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
+import { FResponse } from 'src/common/utils/format-response';
+import { CategoryRepository } from './category.repository';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  constructor(private categoryRepository: CategoryRepository) {}
+
+  async create(createCategoryDto: CreateCategoryDto) {
+    const createCategory = await this.categoryRepository.save(
+      createCategoryDto,
+    );
+    return FResponse(true, createCategory);
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll() {
+    const categoriesList = await this.categoryRepository.find({});
+    return FResponse(true, categoriesList);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    const categoryFound = await this.categoryRepository.findOneOrThrowEx({
+      id,
+    });
+    return FResponse(true, categoryFound);
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    const { type } = updateCategoryDto;
+    const updatedCategory = await this.categoryRepository.findOneAndUpdate(
+      { id },
+      { type },
+    );
+    return FResponse(true, updatedCategory, 'Update successfuly');
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string) {
+    const deletedCategory = await this.categoryRepository.findOneAndDelete({
+      id,
+    });
+    if (!deletedCategory) return FResponse(false, null, 'Delete failed');
+    return FResponse(true, deletedCategory, 'Delete successfuly');
   }
 }

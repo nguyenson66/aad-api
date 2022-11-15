@@ -6,8 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  ParseUUIDPipe,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
@@ -18,6 +19,7 @@ export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 
   @Post()
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   create(@Body() createAuthorDto: CreateAuthorDto) {
     return this.authorService.create(createAuthorDto);
   }
@@ -28,17 +30,21 @@ export class AuthorController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authorService.findOne(+id);
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.authorService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthorDto: UpdateAuthorDto) {
-    return this.authorService.update(+id, updateAuthorDto);
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateAuthorDto: UpdateAuthorDto,
+  ) {
+    return this.authorService.update(id, updateAuthorDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authorService.remove(+id);
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.authorService.remove(id);
   }
 }

@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { FResponse } from 'src/common/utils/format-response';
+import { AuthorRepository } from './author.repository';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 
 @Injectable()
 export class AuthorService {
-  create(createAuthorDto: CreateAuthorDto) {
-    return 'This action adds a new author';
+  constructor(private authorRepo: AuthorRepository) {}
+  async create(createAuthorDto: CreateAuthorDto) {
+    const createdAuthor = await this.authorRepo.save(createAuthorDto);
+
+    return FResponse(true, createdAuthor);
   }
 
-  findAll() {
-    return `This action returns all author`;
+  async findAll() {
+    const listAuthors = await this.authorRepo.find({});
+    return FResponse(true, listAuthors);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} author`;
+  async findOne(id: string) {
+    const foundAuthors = await this.authorRepo.findOneOrThrowEx({ id });
+    return FResponse(true, foundAuthors);
   }
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
+  async update(id: string, updateAuthorDto: UpdateAuthorDto) {
+    const { name, dateOfBirth, pseudonym } = updateAuthorDto;
+    const updatedAuthor = await this.authorRepo.findOneAndUpdate(
+      { id },
+      { name, dateOfBirth, pseudonym },
+    );
+
+    if (!updatedAuthor) return FResponse(false, null, 'Update failed');
+    return FResponse(true, updatedAuthor, 'Update successful');
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} author`;
+  async remove(id: string) {
+    const deletedAuthor = await this.authorRepo.findOneAndDelete({ id });
+    if (!deletedAuthor) return FResponse(false, null, 'Delete failed');
+    return FResponse(true, deletedAuthor, 'Delete successful');
   }
 }

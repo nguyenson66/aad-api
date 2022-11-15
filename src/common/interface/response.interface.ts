@@ -1,4 +1,5 @@
 export interface IResponse {
   success: boolean;
-  data: any;
+  data?: any;
+  message?: string | string[];
 }

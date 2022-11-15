@@ -1,7 +1,10 @@
 import { Book } from 'src/modules/book/entities/book.entity';
-import { Column, ManyToOne } from 'typeorm';
-
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+@Entity()
 export class Image {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
   @Column()
   content: string;
 

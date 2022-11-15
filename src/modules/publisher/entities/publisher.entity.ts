@@ -1,7 +1,10 @@
 import { Book } from 'src/modules/book/entities/book.entity';
-import { Column, OneToMany } from 'typeorm';
-
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+@Entity()
 export class Publisher {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
   @Column()
   name: string;
 

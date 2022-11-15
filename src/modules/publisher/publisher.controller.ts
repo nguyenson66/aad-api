@@ -6,11 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { PublisherService } from './publisher.service';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 @Controller('publishers')
 @ApiTags('Publishers')
@@ -18,6 +19,7 @@ export class PublisherController {
   constructor(private readonly publisherService: PublisherService) {}
 
   @Post()
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   create(@Body() createPublisherDto: CreatePublisherDto) {
     return this.publisherService.create(createPublisherDto);
   }
@@ -28,20 +30,21 @@ export class PublisherController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.publisherService.findOne(+id);
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.publisherService.findOne(id);
   }
 
   @Patch(':id')
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updatePublisherDto: UpdatePublisherDto,
   ) {
-    return this.publisherService.update(+id, updatePublisherDto);
+    return this.publisherService.update(id, updatePublisherDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.publisherService.remove(+id);
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.publisherService.remove(id);
   }
 }

@@ -6,41 +6,37 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
-  constructor(private categoryRepository: CategoryRepository) {}
+  constructor(private cateRepo: CategoryRepository) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    const createCategory = await this.categoryRepository.save(
-      createCategoryDto,
-    );
-    return FResponse(true, createCategory);
+    const createCate = await this.cateRepo.save(createCategoryDto);
+    return FResponse(true, createCate);
   }
 
   async findAll() {
-    const categoriesList = await this.categoryRepository.find({});
-    return FResponse(true, categoriesList);
+    const listCates = await this.cateRepo.find({});
+    return FResponse(true, listCates);
   }
 
   async findOne(id: string) {
-    const categoryFound = await this.categoryRepository.findOneOrThrowEx({
+    const foundCate = await this.cateRepo.findOneOrThrowEx({
       id,
     });
-    return FResponse(true, categoryFound);
+    return FResponse(true, foundCate);
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     const { type } = updateCategoryDto;
-    const updatedCategory = await this.categoryRepository.findOneAndUpdate(
-      { id },
-      { type },
-    );
-    return FResponse(true, updatedCategory, 'Update successfuly');
+    const updatedCate = await this.cateRepo.findOneAndUpdate({ id }, { type });
+    if (!updatedCate) return FResponse(false, null, 'Delete failed');
+    return FResponse(true, updatedCate, 'Update successfuly');
   }
 
   async remove(id: string) {
-    const deletedCategory = await this.categoryRepository.findOneAndDelete({
+    const deletedCate = await this.cateRepo.findOneAndDelete({
       id,
     });
-    if (!deletedCategory) return FResponse(false, null, 'Delete failed');
-    return FResponse(true, deletedCategory, 'Delete successfuly');
+    if (!deletedCate) return FResponse(false, null, 'Delete failed');
+    return FResponse(true, deletedCate, 'Delete successfuly');
   }
 }

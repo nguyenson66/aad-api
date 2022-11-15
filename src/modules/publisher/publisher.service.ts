@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { FResponse } from 'src/common/utils/format-response';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
+import { PublisherRepository } from './publisher.repository';
 
 @Injectable()
 export class PublisherService {
-  create(createPublisherDto: CreatePublisherDto) {
-    return 'This action adds a new publisher';
+  constructor(private pubRepo: PublisherRepository) {}
+  async create(createPublisherDto: CreatePublisherDto) {
+    const createdPub = await this.pubRepo.save(createPublisherDto);
+    return FResponse(true, createdPub);
   }
 
-  findAll() {
-    return `This action returns all publisher`;
+  async findAll() {
+    const listPubs = await this.pubRepo.find({});
+    return FResponse(true, listPubs);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} publisher`;
+  async findOne(id: string) {
+    const foundPub = await this.pubRepo.findOneOrThrowEx({ id });
+
+    return FResponse(true, foundPub);
   }
 
-  update(id: number, updatePublisherDto: UpdatePublisherDto) {
-    return `This action updates a #${id} publisher`;
+  async update(id: string, updatePublisherDto: UpdatePublisherDto) {
+    const { name } = updatePublisherDto;
+    const updatedPub = await this.pubRepo.findOneAndUpdate({ id }, { name });
+    if (!updatedPub) return FResponse(false, null, 'Update failed');
+    return FResponse(true, updatedPub, 'Update successful');
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} publisher`;
+  async remove(id: string) {
+    const deletedPub = await this.pubRepo.findOneAndDelete({ id });
+    if (!deletedPub) return FResponse(false, null, 'Delete failed');
+    return FResponse(true, deletedPub, 'Delete Successfull');
   }
 }

@@ -6,14 +6,22 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
   BaseEntity,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
+import { CustomerEntity } from 'src/modules/customers/entities/customers.entity';
 
 @Entity({ name: 'users' })
 export class UsersEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @OneToOne(() => CustomerEntity, (customer) => customer.id)
+  @JoinColumn()
+  @Column({ nullable: true })
+  customerId: string;
 
   @Column({ nullable: false, name: 'first_name' })
   firstName: string;

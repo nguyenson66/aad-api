@@ -1,7 +1,6 @@
-
-  export interface IFullName {
-    id?: string;
+export interface IFullName {
+  id?: string;
   customerId?: string;
-          firstName?: string;
-          lastName?: string;
-          }
+  firstName?: string;
+  lastName?: string;
+}

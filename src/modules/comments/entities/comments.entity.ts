@@ -1,3 +1,4 @@
+import { CustomerEntity } from 'src/modules/customers/entities/customers.entity';
 import {
   Entity,
   Column,
@@ -5,9 +6,11 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
   BaseEntity,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
-@Entity({ name: 'Comment' })
+@Entity({ name: 'comment' })
 export class CommentEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -15,6 +18,8 @@ export class CommentEntity extends BaseEntity {
   @Column({ nullable: false })
   bookId: string;
 
+  @ManyToOne(() => CustomerEntity, (customer) => customer.id)
+  @JoinColumn()
   @Column({ nullable: false })
   customerId: string;
 

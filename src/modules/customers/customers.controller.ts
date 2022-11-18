@@ -12,10 +12,11 @@ import { CustomerService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customers.dto';
 import { UpdateCustomerDto } from './dto/update-customers.dto';
 import { ResponseCustomerDto } from './dto/response-customers.dto';
+import { CustomerControllerImpl } from './interface/customer.controller.interface';
 
 @ApiTags('Customer')
 @Controller('customer')
-export class CustomerController {
+export class CustomerController implements CustomerControllerImpl {
   constructor(private readonly customerService: CustomerService) {}
 
   @Post()

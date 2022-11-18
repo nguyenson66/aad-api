@@ -12,10 +12,11 @@ import { CartService } from './carts.service';
 import { CreateCartDto } from './dto/create-carts.dto';
 import { UpdateCartDto } from './dto/update-carts.dto';
 import { ResponseCartDto } from './dto/response-carts.dto';
+import { CartControllerImpl } from './interface/carts.controller.interface';
 
 @ApiTags('Cart')
 @Controller('cart')
-export class CartController {
+export class CartController implements CartControllerImpl {
   constructor(private readonly cartService: CartService) {}
 
   @Post()

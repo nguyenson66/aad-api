@@ -12,10 +12,11 @@ import { CashService } from './cash.service';
 import { CreateCashDto } from './dto/create-cash.dto';
 import { UpdateCashDto } from './dto/update-cash.dto';
 import { ResponseCashDto } from './dto/response-cash.dto';
+import { CashControllerImpl } from './interface/cash.controller.interface';
 
 @ApiTags('Cash')
 @Controller('cash')
-export class CashController {
+export class CashController implements CashControllerImpl {
   constructor(private readonly cashService: CashService) {}
 
   @Post()

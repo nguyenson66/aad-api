@@ -12,10 +12,11 @@ import { CardService } from './cards.service';
 import { CreateCardDto } from './dto/create-cards.dto';
 import { UpdateCardDto } from './dto/update-cards.dto';
 import { ResponseCardDto } from './dto/response-cards.dto';
+import { CardControllerImpl } from './interface/card.controller.interface';
 
 @ApiTags('Card')
 @Controller('card')
-export class CardController {
+export class CardController implements CardControllerImpl {
   constructor(private readonly cardService: CardService) {}
 
   @Post()

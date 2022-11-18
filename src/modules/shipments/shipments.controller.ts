@@ -12,10 +12,11 @@ import { ShipmentService } from './shipments.service';
 import { CreateShipmentDto } from './dto/create-shipments.dto';
 import { UpdateShipmentDto } from './dto/update-shipments.dto';
 import { ResponseShipmentDto } from './dto/response-shipments.dto';
+import { ShipmentControllerImpl } from './interface/shipments.controller.interface';
 
 @ApiTags('Shipment')
 @Controller('shipment')
-export class ShipmentController {
+export class ShipmentController implements ShipmentControllerImpl {
   constructor(private readonly shipmentService: ShipmentService) {}
 
   @Post()

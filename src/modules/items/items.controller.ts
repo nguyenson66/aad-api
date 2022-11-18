@@ -12,10 +12,11 @@ import { ItemService } from './items.service';
 import { CreateItemDto } from './dto/create-items.dto';
 import { UpdateItemDto } from './dto/update-items.dto';
 import { ResponseItemDto } from './dto/response-items.dto';
+import { ItemControllerImpl } from './interface/items.controller.interface';
 
 @ApiTags('Item')
 @Controller('item')
-export class ItemController {
+export class ItemController implements ItemControllerImpl {
   constructor(private readonly itemService: ItemService) {}
 
   @Post()

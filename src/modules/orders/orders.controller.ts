@@ -12,10 +12,11 @@ import { OrderService } from './orders.service';
 import { CreateOrderDto } from './dto/create-orders.dto';
 import { UpdateOrderDto } from './dto/update-orders.dto';
 import { ResponseOrderDto } from './dto/response-orders.dto';
+import { OrderControllerImpl } from './interface/orders.controller.interface';
 
 @ApiTags('Order')
 @Controller('order')
-export class OrderController {
+export class OrderController implements OrderControllerImpl {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()

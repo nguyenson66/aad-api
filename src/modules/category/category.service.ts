@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { FResponse } from 'src/common/utils/format-response';
 import { CategoryRepository } from './category.repository';
+import { CategoryServiceImpl } from './category.service.interface';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
-export class CategoryService {
+export class CategoryService implements CategoryServiceImpl {
   constructor(private cateRepo: CategoryRepository) {}
 
   async create(createCategoryDto: CreateCategoryDto) {

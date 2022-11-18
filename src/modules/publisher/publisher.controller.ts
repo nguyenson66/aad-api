@@ -12,10 +12,11 @@ import { PublisherService } from './publisher.service';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { PublisherControllerImpl } from './publisher.controller.interface';
 
 @Controller('publishers')
 @ApiTags('Publishers')
-export class PublisherController {
+export class PublisherController implements PublisherControllerImpl {
   constructor(private readonly publisherService: PublisherService) {}
 
   @Post()

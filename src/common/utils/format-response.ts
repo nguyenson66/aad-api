@@ -5,3 +5,5 @@ export const FResponse = (
 ) => {
   return { success, data, message };
 };
+
+export type IResponse = ReturnType<typeof FResponse>;

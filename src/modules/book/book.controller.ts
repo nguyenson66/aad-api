@@ -9,13 +9,14 @@ import {
   ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { BookControllerImpl } from './book.controller.interface';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 
 @Controller('books')
 @ApiTags('Books')
-export class BookController {
+export class BookController implements BookControllerImpl {
   constructor(private readonly bookService: BookService) {}
 
   @Post()
@@ -31,7 +32,7 @@ export class BookController {
 
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.bookService.findOne(+id);
+    return this.bookService.findOne(id);
   }
 
   @Patch(':id')
@@ -40,11 +41,11 @@ export class BookController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateBookDto: UpdateBookDto,
   ) {
-    return this.bookService.update(+id, updateBookDto);
+    return this.bookService.update(id, updateBookDto);
   }
 
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.bookService.remove(+id);
+    return this.bookService.remove(id);
   }
 }

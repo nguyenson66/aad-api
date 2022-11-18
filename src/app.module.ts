@@ -12,6 +12,10 @@ import { CategoryModule } from './modules/category/category.module';
 import { ImagesModule } from './modules/images/images.module';
 import { PublisherModule } from './modules/publisher/publisher.module';
 import { UsersModule } from './modules/users/users.module';
+import { CustomerModule } from './modules/customers/customers.module';
+import { CommentModule } from './modules/comments/comments.module';
+import { AddressModule } from './modules/addresses/addresses.module';
+import { FullNameModule } from './modules/full-names/full-names.module';
 
 @Module({
   imports: [
@@ -25,6 +29,10 @@ import { UsersModule } from './modules/users/users.module';
     PublisherModule,
     AuthorModule,
     ImagesModule,
+    CustomerModule,
+    CommentModule,
+    AddressModule,
+    FullNameModule,
   ],
   controllers: [AppController],
   providers: [AppService],

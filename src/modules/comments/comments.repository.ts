@@ -10,7 +10,7 @@ export class CommentRepository extends Repository<CommentEntity> {
     super(CommentEntity, dataSource.createEntityManager());
   }
   createComment = (commentDto: CreateCommentDto) => {
-    return this.save(CommentDto);
+    return this.save(commentDto);
   };
   updateComment = (id: string, commentDto: UpdateCommentDto) => {
     return this.save({ ...commentDto, id });

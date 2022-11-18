@@ -10,7 +10,7 @@ export class CustomerRepository extends Repository<CustomerEntity> {
     super(CustomerEntity, dataSource.createEntityManager());
   }
   createCustomer = (customerDto: CreateCustomerDto) => {
-    return this.save(CustomerDto);
+    return this.save(customerDto);
   };
   updateCustomer = (id: string, customerDto: UpdateCustomerDto) => {
     return this.save({ ...customerDto, id });

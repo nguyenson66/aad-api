@@ -12,7 +12,7 @@
         super(AddressEntity , dataSource.createEntityManager());
       }
       createAddress = (addressDto: CreateAddressDto) => {
-        return this.save(AddressDto);
+        return this.save(addressDto);
       };
       updateAddress = (id: string, addressDto: UpdateAddressDto) => {
         return this.save({ ...addressDto, id });

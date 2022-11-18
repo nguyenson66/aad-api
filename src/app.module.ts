@@ -16,6 +16,12 @@ import { CustomerModule } from './modules/customers/customers.module';
 import { CommentModule } from './modules/comments/comments.module';
 import { AddressModule } from './modules/addresses/addresses.module';
 import { FullNameModule } from './modules/full-names/full-names.module';
+import { ItemModule } from './modules/items/items.module';
+import { CartModule } from './modules/carts/carts.module';
+import { OrderModule } from './modules/orders/orders.module';
+import { ShipmentModule } from './modules/shipments/shipments.module';
+import { CardModule } from './modules/cards/cards.module';
+import { CashModule } from './modules/cash/cash.module';
 
 @Module({
   imports: [
@@ -33,6 +39,12 @@ import { FullNameModule } from './modules/full-names/full-names.module';
     CommentModule,
     AddressModule,
     FullNameModule,
+    ItemModule,
+    CartModule,
+    OrderModule,
+    ShipmentModule,
+    CardModule,
+    CashModule,
   ],
   controllers: [AppController],
   providers: [AppService],

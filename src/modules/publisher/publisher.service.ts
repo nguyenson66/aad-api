@@ -3,9 +3,10 @@ import { FResponse } from 'src/common/utils/format-response';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { PublisherRepository } from './publisher.repository';
+import { PublisherServiceImpl } from './publisher.service.interface';
 
 @Injectable()
-export class PublisherService {
+export class PublisherService implements PublisherServiceImpl {
   constructor(private pubRepo: PublisherRepository) {}
   async create(createPublisherDto: CreatePublisherDto) {
     const createdPub = await this.pubRepo.save(createPublisherDto);

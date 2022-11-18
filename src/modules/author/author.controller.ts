@@ -9,13 +9,14 @@ import {
   ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { AuthorControllerImpl } from './author.controller.interface';
 import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 
 @Controller('authors')
 @ApiTags('Authors')
-export class AuthorController {
+export class AuthorController implements AuthorControllerImpl {
   constructor(private readonly authorService: AuthorService) {}
 
   @Post()
